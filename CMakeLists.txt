@@ -51,42 +51,30 @@ endif()
 #########################
 # build for ROS2
 # https://github.com/ament/ament_tools/pull/142
-if(ament_cmake_FOUND AND IS_COLCON_BUILD)
-# if(DEFINED ENV{AMENT_TOOLS})
-  # colcon does not show STATUS messages; but serves as info if ROS build was NOT intended
-  message(STATUS "building for ROS2 using ament_cmake")
+# colcon does not show STATUS messages; but serves as info if ROS build was NOT intended
+message(STATUS "building for ROS2 using ament_cmake")
 
-  # ## TESTING
-  # if(BUILD_TESTING)
-  #     # TODO
-  # endif()
+# ## TESTING
+# if(BUILD_TESTING)
+#     # TODO
+# endif()
 
-  # INSTALL
-  install(
-    TARGETS ${PROJECT_NAME}
-    DESTINATION lib/${PROJECT_NAME}
-  )
+# INSTALL
+install(
+  TARGETS ${PROJECT_NAME}
+  DESTINATION lib/${PROJECT_NAME}
+)
 
-  install(
-    TARGETS lib${PROJECT_NAME}
-    EXPORT export_lib${PROJECT_NAME}
-    ARCHIVE DESTINATION lib
-    LIBRARY DESTINATION lib
-  )
+install(
+  TARGETS lib${PROJECT_NAME}
+  EXPORT export_lib${PROJECT_NAME}
+  ARCHIVE DESTINATION lib
+  LIBRARY DESTINATION lib
+)
 
-  # export for use by ament packages
-  ament_export_targets(export_lib${PROJECT_NAME})
-  ament_export_libraries(lib${PROJECT_NAME})
-  ament_export_dependencies()
+# export for use by ament packages
+ament_export_targets(export_lib${PROJECT_NAME})
+ament_export_libraries(lib${PROJECT_NAME})
+ament_export_dependencies()
 
-  ament_package()
-
-#########################
-# build standalone CMake
-else()
-
-  include(GNUInstallDirs)
-  install(TARGETS ${PROJECT_NAME} RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR})
-
-#########################
-endif()
+ament_package()
